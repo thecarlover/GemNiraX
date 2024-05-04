@@ -1,15 +1,15 @@
-import menu from './menu.gif'
-import plus from './plus-2.png'
-import help from './helpdesk.gif'
+import menu from './menul.png'
+import plus from './plus-3.png'
+
 import eye from './eye.gif'
 import man from './man.png'
 import light from './lightbulb.png'
-import setting from './settings.gif'
-import history from './history-book.gif'
+import setting from './settings.png'
+import history from './jogging.png'
 import mic from './mic.png'
 import addimage from './image.png'
 import message from './messenger.png'
-import question from './helpdesk.gif'
+import question from './helpdesk.png'
 
 
 
@@ -18,7 +18,6 @@ import question from './helpdesk.gif'
 export const assets={
     menu,
     plus,
-    help,
     eye,
     man,
     light,

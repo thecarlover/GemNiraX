@@ -1,11 +1,11 @@
-import menu from './menul.png'
+import menu from './hamburger-2.png'
 import plus from './plus-3.png'
 
 import eye from './eye.gif'
 import man from './man.png'
 import light from './lightbulb.png'
 import setting from './settings.png'
-import history from './jogging.png'
+import history from './activity.png'
 import mic from './mic.png'
 import addimage from './image.png'
 import message from './messenger.png'

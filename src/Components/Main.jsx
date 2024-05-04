@@ -4,12 +4,12 @@ import { assets } from "../assets/assets";
 import SearchBar from "./SearchBar";
 
 const Main = () => {
-  const { showResult, recentPrompt, resultData, loading } = useContext(Context);
+  const { showResult, recentPrompt, resultData } = useContext(Context);
 
   return (
     <div className="main flex-1 min-h-screen pb-10 relative">
       {/* This container will overlay the iframe */}
-      <div className="absolute top-0 left-0 w-full h-full flex flex-col">
+      <div className="absolute top-0 left-0 w-full h-full flex flex-col overflow-hidden">
         <div className="nav flex items-center justify-between font-normal text-2xl p-10 text-gray-400">
           <p className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 inline-block text-transparent bg-clip-text ">
             GemNiraX
@@ -17,7 +17,7 @@ const Main = () => {
           <img className="w-10 h-10 " src={assets.man} alt="" />
         </div>
 
-        <div className="main-container max-w-4xl m-auto font-semibold flex-1">
+        <div className="main-container max-w-4xl m-auto font-semibold flex-1 overflow-y-auto">
           {!showResult ? (
             <>
               <div className="greet mx-10 my-0 text-6xl text-gray-400 p-1">
@@ -36,22 +36,14 @@ const Main = () => {
               ></iframe>
             </>
           ) : (
-            <div className="result max-h-96 overflow-y-auto overflow-hidden">
-              <div className="result-title mt-10 mb-10 flex items-center gap-5">
-                <img className="w-7 h-7 rounded-full" src={assets.man} alt="" />
+            <div className="result max-h-96 overflow-y-auto">
+              <div className="result-title">
+                <img className="w-7 h-7" src={assets.man} alt="" />
                 <p>{recentPrompt}</p>
               </div>
-              <div className="result-data flex items-start gap-10" style={{ textAlign: "left" }}>
+              <div className="result-data">
                 <img className="w-7 h-7" src={assets.eye} alt="" />
-                {loading ?
-                  <div className="loader w-full flex flex-col gap-2.5">
-                    <hr className="rounded border-none bg-gray-100 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-auto h-5 " />
-                    <hr className="rounded border-none bg-gray-100 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-auto h-5" />
-                    <hr className="rounded border-none bg-gray-100 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-auto h-5" />
-                  </div>
-                  :
-                  <p dangerouslySetInnerHTML={{__html:resultData}} className=""></p>
-                }
+                <p dangerouslySetInnerHTML={{__html:resultData}} className=""></p>
               </div>
             </div>
           )}

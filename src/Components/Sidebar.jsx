@@ -1,66 +1,48 @@
-import React, { useContext } from "react";
-import { Context } from "../context/Context";
-import { assets } from "../assets/assets";
-import SearchBar from "./SearchBar";
+import React, { useState } from 'react';
+import { assets } from '../assets/assets'; // Import your assets
 
-const Main = () => {
-  const { showResult, recentPrompt, resultData, loading } = useContext(Context);
+const Sidebar = () => {
 
+    const [extended,setExtended]=useState(false)
+    
   return (
-    <div className="main flex-1 min-h-screen pb-10 relative">
-      {/* This container will overlay the iframe */}
-      <div className="absolute top-0 left-0 w-full h-full flex flex-col">
-        <div className="nav flex items-center justify-between font-normal text-2xl p-10 text-gray-400">
-          <p className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 inline-block text-transparent bg-clip-text ">
-            GemNiraX
-          </p>
-          <img className="w-10 h-10 " src={assets.man} alt="" />
-        </div>
-
-        <div className="main-container max-w-4xl m-auto font-semibold flex-1">
-          {!showResult ? (
-            <>
-              <div className="greet mx-10 my-0 text-6xl text-gray-400 p-1">
-                <p>
-                  <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 inline-block text-transparent bg-clip-text ">
-                    Hello, Folks
-                  </span>
-                </p>
-                <p>How can I help you today?</p>
-              </div>
-              <iframe
-                className="w-full h-full absolute top-0 left-0"
-                src="https://my.spline.design/planetcopy-e031df29ad4c393cc5afe77fb1cdbbda/"
-                style={{ zIndex: -1 }} // Ensure iframe is behind overlay
-                title="Planet Copy"
-              ></iframe>
-            </>
-          ) : (
-            <div className="result max-h-96 overflow-y-auto overflow-hidden">
-              <div className="result-title mt-10 mb-10 flex items-center gap-5">
-                <img className="w-7 h-7 rounded-full" src={assets.man} alt="" />
-                <p>{recentPrompt}</p>
-              </div>
-              <div className="result-data flex items-start gap-10" style={{ textAlign: "left" }}>
-                <img className="w-7 h-7" src={assets.eye} alt="" />
-                {loading ?
-                  <div className="loader w-full flex flex-col gap-2.5">
-                    <hr className="rounded border-none bg-gray-100 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-auto h-5 " />
-                    <hr className="rounded border-none bg-gray-100 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-auto h-5" />
-                    <hr className="rounded border-none bg-gray-100 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-auto h-5" />
-                  </div>
-                  :
-                  <p dangerouslySetInnerHTML={{__html:resultData}} className=""></p>
-                }
-              </div>
+    <div className="sidebar min-h-screen inline-flex flex-col justify-between bg-black text-gray-200">
+        <div className="top flex flex-col items-center py-3">
+            <img className='w-10 h-10 cursor-pointer' onClick={()=>setExtended(prev=>!prev)} src={assets.menu} alt="Menu" />
+            <div className="mt-20 flex items-center gap-3 px-5 py-1.5 bg-gray-700 rounded-full text-sm cursor-pointer hover:bg-gray-600 hover:text-white transition-colors duration-300">
+                <img className='w-5 h-5' src={assets.plus} alt="New Chat" />
+                {extended?<p className='bg-gradient-to-r from-red-400 via-indigo-300 to-purple-500 inline-block text-transparent bg-clip-text'>New Chat</p>:null}
             </div>
-          )}
+            {extended?
+              <div className="mt-8 w-full">
+              <p className="text-sm text-gray-400 px-4">Recent</p>
+              <div className="recent-entry flex items-center gap-3 p-2 pl-4 rounded-md text-gray-400 cursor-pointer hover:bg-gray-700 hover:text-white transition-colors duration-300">
+                  <img className='w-6 h-6' src={assets.message} alt="Recent Chat" />
+                  <p>What is React...</p>
+              </div>
+          </div>:
+          null
+            
+        }
+          
         </div>
 
-        <SearchBar />
-      </div>
+        <div className="bottom mt-6">
+            <div className="bottom-item flex bg-gradient-to-r from-red-400 via-indigo-300 to-purple-500 inline-block text-transparent bg-clip-text items-center gap-3 px-4 py-3 hover:bg-gray-700 hover:text-white cursor-pointer transition-colors duration-300">
+                <img className='w-8 h-8' src={assets.question} alt="Help" />
+                {extended?<p>Help</p>:null}
+            </div>
+            <div className="bottom-item flex items-center bg-gradient-to-r from-red-400 via-indigo-300 to-purple-500 inline-block text-transparent bg-clip-text gap-3 px-4 py-3 hover:bg-gray-700 hover:text-white cursor-pointer transition-colors duration-300">
+                <img className='w-8 h-8' src={assets.history} alt="Activity" />
+                {extended?<p>Activity</p>:null}
+            </div>
+            <div className="bottom-item flex items-center bg-gradient-to-r from-red-400 via-indigo-300 to-purple-500 inline-block text-transparent bg-clip-text gap-3 px-4 py-3 hover:bg-gray-700 hover:text-white cursor-pointer transition-colors duration-300">
+                <img className='w-8 h-8' src={assets.setting} alt="Settings" />
+                {extended?<p>Settings</p>:null}
+            </div>
+        </div>
     </div>
   );
-};
+}
 
-export default Main;
+export default Sidebar;
